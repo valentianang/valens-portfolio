@@ -1,7 +1,8 @@
 import { motion } from "motion/react";
 import { useInView } from "motion/react";
 import { useRef } from "react";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import styles from "./Projects.module.css";
 
 const projects = [
   {
@@ -32,13 +33,13 @@ const projects = [
 
 export function Projects() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { margin: "-100px" });
 
   return (
-    <section id="projects" className="py-24 px-6 bg-pastel-yellow">
-      <div className="max-w-6xl mx-auto" ref={ref}>
+    <section id="projects" className={styles.projects}>
+      <div className={styles.container} ref={ref}>
         <motion.h2
-          className="text-neutral-900 mb-16 ml-8"
+          className={styles.title}
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
@@ -46,36 +47,36 @@ export function Projects() {
           Featured Projects
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 gap-8 ml-8">
+        <div className={styles.grid}>
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              className="bg-white p-8 rounded-lg"
+              className={styles.projectCard}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
             >
-              <div className="mb-4">
-                <span className="text-sm text-light-brown">{project.type}</span>
+              <div>
+                <span className={styles.projectType}>{project.type}</span>
               </div>
-              <h3 className="text-neutral-900 mb-4">{project.title}</h3>
-              <p className="text-neutral-600 mb-6">{project.description}</p>
+              <h3 className={styles.projectTitle}>{project.title}</h3>
+              <p className={styles.projectDescription}>{project.description}</p>
               
-              <div className="flex flex-wrap gap-2 mb-6">
+              <div className={styles.tagContainer}>
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 bg-neutral-100 text-neutral-600 rounded-full text-sm"
+                    className={styles.tag}
                   >
                     {tag}
                   </span>
                 ))}
               </div>
 
-              <div className="flex gap-4">
+              <div className={styles.linkContainer}>
                 <motion.button
-                  className="flex items-center gap-2 text-light-brown hover:text-brown-dark transition-colors"
+                  className={styles.projectLink}
                   whileHover={{ x: 5 }}
                 >
                   <span>View Details</span>

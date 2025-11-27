@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { ImageWithFallback } from "./ImageWithFallback";
+import styles from "./MarqueeCarousel.module.css";
 
 interface MarqueeCarouselProps {
   direction?: "left" | "right";
@@ -14,9 +15,9 @@ export function MarqueeCarousel({
   const duplicatedImages = [...images, ...images];
 
   return (
-    <div className="overflow-hidden bg-light-brown py-10 border-y border-brown-dark/20">
+    <div className={styles.carousel}>
       <motion.div
-        className="flex gap-6 whitespace-nowrap"
+        className={styles.carouselTrack}
         animate={{
           x:
             direction === "right"
@@ -32,12 +33,12 @@ export function MarqueeCarousel({
         {duplicatedImages.map((image, index) => (
           <div
             key={index}
-            className="flex-shrink-0 w-44 h-24 bg-white/10 rounded-lg overflow-hidden backdrop-blur-sm"
+            className={styles.imageWrapper}
           >
             <ImageWithFallback
               src={image.src}
               alt={image.alt}
-              className="w-full h-full object-cover"
+              className={styles.image}
             />
           </div>
         ))}
