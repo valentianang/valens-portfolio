@@ -24,7 +24,7 @@ export function Hero() {
             Hello, I'm
           </motion.p>
           <h1 className={styles.title}>
-            Your Name
+            Valen N.
           </h1>
           <motion.div
             initial={{ opacity: 0 }}

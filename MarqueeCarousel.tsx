@@ -11,8 +11,8 @@ export function MarqueeCarousel({
   direction = "right",
   images,
 }: MarqueeCarouselProps) {
-  // Double the items for seamless loop
-  const duplicatedImages = [...images, ...images];
+  // 6x duplication for ultra-smooth infinite loop
+  const duplicatedImages = [...images, ...images, ...images, ...images, ...images, ...images];
 
   return (
     <div className={styles.carousel}>
@@ -28,6 +28,7 @@ export function MarqueeCarousel({
           duration: 40,
           repeat: Infinity,
           ease: "linear",
+          repeatType: "loop",
         }}
       >
         {duplicatedImages.map((image, index) => (

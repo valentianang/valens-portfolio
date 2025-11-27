@@ -1,11 +1,11 @@
 .hero {
-  min-height: 100vh;
+  min-height: calc(100vh - 80px); /* Account for fixed header */
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   background-color: white;
-  padding: 0 1.25rem; /* px-5 */
+  padding: 4rem 1.25rem; /* Equal top and bottom padding */
 }
 
 .container {
@@ -17,16 +17,20 @@
 .greeting {
   color: var(--color-light-brown);
   margin-bottom: 1.5rem;
+  font-size: 1.375rem; /* 22px - slightly bigger */
 }
 
 .title {
   color: rgb(23 23 23); /* neutral-900 */
   margin-bottom: 1.5rem;
+  font-size: 4rem; /* 64px - bigger than default h1 */
+  font-weight: 300; /* Thin/light weight */
+  line-height: 1.1;
 }
 
 .subtitle {
   color: rgb(82 82 82); /* neutral-600 */
-  font-size: 1.25rem;
+  font-size: 1.5rem; /* 24px - increased from 20px */
   margin-bottom: 2rem;
   max-width: 42rem;
   margin-left: auto;
@@ -37,6 +41,8 @@
   color: rgb(115 115 115); /* neutral-500 */
   max-width: 36rem;
   margin: 0 auto;
+  font-size: 1.125rem; /* 18px - increased from 16px */
+  line-height: 1.6;
 }
 
 .buttonGroup {

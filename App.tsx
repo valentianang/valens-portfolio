@@ -5,6 +5,7 @@ import { Skills } from "./Skills";
 import { Projects } from "./Projects";
 import { Contact } from "./Contact";
 import { MarqueeCarousel } from "./MarqueeCarousel";
+import { useState, useEffect } from "react";
 
 const topCarouselImages = [
   { src: "/images/top-1.jpg", alt: "Coding workspace" },
@@ -25,14 +26,31 @@ const bottomCarouselImages = [
 ];
 
 export default function App() {
+  const [showCarousels, setShowCarousels] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Hide carousels when scrolled down more than 100px
+      setShowCarousels(window.scrollY < 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen">
-      <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
-        <MarqueeCarousel direction="right" images={topCarouselImages} />
-        <Navigation />
-        <MarqueeCarousel direction="left" images={bottomCarouselImages} />
+      <div 
+        className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm transition-all duration-300"
+        style={{
+          paddingTop: showCarousels ? '0' : '0',
+        }}
+      >
+        {showCarousels && <MarqueeCarousel direction="right" images={topCarouselImages} />}
+        <Navigation isScrolled={!showCarousels} />
+        {showCarousels && <MarqueeCarousel direction="left" images={bottomCarouselImages} />}
       </div>
-      <div style={{ paddingTop: '120px' }}>
+      <div style={{ paddingTop: showCarousels ? '80px' : '40px' }}>
         <Hero />
         <About />
         <Skills />

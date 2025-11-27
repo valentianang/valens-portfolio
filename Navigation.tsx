@@ -1,18 +1,11 @@
 import { motion } from "motion/react";
-import { useState, useEffect } from "react";
+import styles from "./Navigation.module.css";
 
-export function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false);
+interface NavigationProps {
+  isScrolled?: boolean;
+}
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () =>
-      window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+export function Navigation({ isScrolled = false }: NavigationProps) {
   const scrollToSection = (id: string) => {
     document
       .getElementById(id)
@@ -20,15 +13,10 @@ export function Navigation() {
   };
 
   return (
-    <motion.nav
-      className="bg-white px-10 py-12 shadow-md"
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
-    >
-      <div className="max-w-6x1 min-h-6x5 mx-auto flex justify-between items-center">
+    <nav className={`${styles.navigation} ${isScrolled ? styles.scrolled : ''}`}>
+      <div className={styles.container}>
         <motion.button
-          className="text-neutral-900"
+          className={styles.logo}
           whileHover={{ scale: 1.05 }}
           onClick={() =>
             window.scrollTo({ top: 0, behavior: "smooth" })
@@ -37,11 +25,11 @@ export function Navigation() {
           YN
         </motion.button>
 
-        <div className="flex gap-8">
+        <div className={styles.navLinks}>
           {["about", "projects", "contact"].map((item) => (
             <motion.button
               key={item}
-              className="text-neutral-700 hover:text-light-brown transition-colors capitalize"
+              className={styles.navLink}
               whileHover={{ y: -1 }}
               onClick={() => scrollToSection(item)}
             >
@@ -50,6 +38,6 @@ export function Navigation() {
           ))}
         </div>
       </div>
-    </motion.nav>
+    </nav>
   );
 }
